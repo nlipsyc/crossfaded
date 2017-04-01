@@ -1,0 +1,12 @@
+{% if song_list %}
+    {% for s in song_list %}
+
+        <div class="songContainer">
+                <h2>{{s.song_name}} -- {{s.artist}}</h2>
+                <p>{{s.lyrics}}</p>
+                <p>STUB FOR YOUTUBE LINK</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>There are no songs that have this ngram :(</p>
+{% endif %}

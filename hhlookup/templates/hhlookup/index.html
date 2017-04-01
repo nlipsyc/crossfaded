@@ -1,0 +1,49 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{#% bootstrap_javascript %#}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel='stylesheet' type='text/css' href='{% static 'hhlookup/style.css' %}'>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+                <a class="navbar-brand" href="/crossfaded/">Home</a>
+        </div>
+</nav>    
+
+<div class=jumbotron>
+        <div class="container">
+                        <h1>Crossfaded</h1>
+        </div> 
+</div>
+
+<div class='container'>
+        <form method="GET">
+            {% csrf_token %}        
+            {{ form }}
+            <h3>Enter a word to find out how it links artists</h3>
+            <input type="text" name="match_search" placeholder="Try: Jedi Mind tricks">
+            <input type="submit" value="Bring the noise" class='btn btn-default'>
+            <h3>Or find something new</h3>
+            <a href="/crossfaded/" class="btn btn-default">Random</a>
+
+        </form>
+        {% if match_list %}
+            <ul class="match_list">
+                {% for m in match_list %}
+                <li><a href="{% url 'match_page' m.slug %}">{{ m.ngram }}</a></li>
+           {% endfor %}    
+            </ul>
+        {% else %}
+                <p>No matches availalble.</p>
+        {% endif %} 
+	<p>Crossfaded looks for groups of 5 words that are shared by 2 or more artists.  When you take out stop words like "if", "the", etc., you can see surprising connections.</p>
+	<p>This is still in the <em>very</em> early stages, so check back for more later</p>
+</div>

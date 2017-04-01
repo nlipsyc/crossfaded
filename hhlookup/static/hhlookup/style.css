@@ -1,0 +1,22 @@
+.highlight{
+        background-color:yellow;
+}
+
+.match_list{
+    list-style-type: none;
+    padding:0;
+}
+
+.match_list a{
+    font-size:150%;
+}
+
+.match_list li{
+        line-height: 200%;
+}
+
+/* Match page */
+
+.songContainer{
+       margin-top: 5%; 
+}
