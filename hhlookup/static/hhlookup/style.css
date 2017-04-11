@@ -1,22 +1,43 @@
-.highlight{
-        background-color:yellow;
+/*
+        Palette
+        white: rgba(255, 255, 255, 1);
+        bkg grey: rgba(51, 51, 51, 1);
+        orange: rgba(246, 81, 29, 1);
+        yellow: rgba(255, 180, 0, 1);
+        blue: rgba(0, 166, 237, 1);
+*/
+html{ 
+        font-size:16px;
+}
+body{
+        font-family: 'Josefin Sans', sans-serif;
 }
 
+.highlight{
+        background-color: rgba(255, 180, 0, 1);
+}
+
+.masthead-brand{
+        font-family: 'Permanent Marker', sans-serif;
+        color :rgba(0, 166, 237, 1); 
+}
 .match_list{
     list-style-type: none;
     padding:0;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    font-size: 150%;
 }
 
-.match_list a{
-    font-size:150%;
-}
 
-.match_list li{
-        line-height: 200%;
-}
 
 /* Match page */
 
 .songContainer{
        margin-top: 5%; 
+}
+
+.songContainer h3{
+        font-family:'Permanent Marker', sans-serif;
 }
