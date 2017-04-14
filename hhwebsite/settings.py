@@ -21,11 +21,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('/etc/secret_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = "asdflkjw2kjalsf" 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'bootstrap3',
     'jquery',
 ]
 
-with open('/etc/youtube_key.txt') as f:
-	YOUTUBE_DEVELOPER_KEY = f.read().strip()
+YOUTUBE_DEVELOPER_KEY = "AIzaSyAaRamjh5oQj4LZurGNwAFGdd7JT-ATSm4" 
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
