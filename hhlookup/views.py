@@ -24,7 +24,9 @@ class IndexView(generic.ListView):
                 return Match.objects.filter(ngram__icontains=form.cleaned_data['match_search'])
             return Match.objects.order_by('?')[:20]
     
-
+class AboutView(generic.TemplateView):
+    template_name = 'hhlookup/about.html'
+    
 class MatchView(generic.ListView):
     model = Match
     template_name = 'hhlookup/match.html'

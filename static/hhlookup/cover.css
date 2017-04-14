@@ -66,9 +66,7 @@ body {
 .masthead {
   margin-bottom: 2rem;
   z-index: 100;
-  background-color: #333;
-  -webkit-box-shadow: inset 0em 3em 4rem rgba(0,0,0,.5);
-  box-shadow: inset 0em 3em 4rem rgba(0,0,0,.5);
+  background-color: #333
 }
 
 .masthead-brand {
@@ -102,13 +100,9 @@ body {
     float: left;
   }
   .nav-masthead {
-    font-size: 2em;
     float: right;
   }
- .nav-masthead li{
-    display:inline-block;
-    padding:0.5em;
- }
+}
 
 
 /*
@@ -131,9 +125,7 @@ body {
 .mastfoot {
   color: rgba(255,255,255,.5);
   z-index: 100;
-  background-color: #333;
-  -webkit-box-shadow: inset 0em -3em 4rem rgba(0,0,0,.5);
-  box-shadow: inset 0em -3em 4rem rgba(0,0,0,.5);
+  background-color: #333
 }
 
 
