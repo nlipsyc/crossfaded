@@ -15,7 +15,6 @@ from oauth2client.tools import argparser
 class IndexView(generic.ListView):
     template_name = 'hhlookup/index.html'
     context_object_name = 'match_list'
-
     
 
     def get_queryset(self):
@@ -35,6 +34,8 @@ class MatchView(generic.ListView):
         context= super(MatchView, self).get_context_data(**kwargs)
         print('==============>', Match.objects.get(slug=self.kwargs['slug']).ngram)
         context['ngram'] = Match.objects.get(slug=self.kwargs['slug']).ngram
+        context['rand'] =  Match.objects.order_by('?').first().slug
+        print('RAND', context['rand'])
         return context        
 
     def get_queryset(self):
