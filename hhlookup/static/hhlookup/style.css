@@ -32,9 +32,11 @@ input{
 }
 
 @media (min-width:40em) {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
+        .match_list{
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+    }
 }
 
 .underline{
