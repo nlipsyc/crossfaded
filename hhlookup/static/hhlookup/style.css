@@ -28,10 +28,13 @@ input{
 .match_list{
     list-style-type: none;
     padding:0;
+    font-size: 150%;
+}
+
+@media (min-width:40em) {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
-    font-size: 150%;
 }
 
 .underline{
