@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Song(models.Model):
     artist = models.TextField()
@@ -8,6 +7,7 @@ class Song(models.Model):
     lyrics = models.TextField()
     filename = models.TextField() # This can be used as a unique ID
     old_index = models.IntegerField(default=-1) #This is used to associate it with the match:w
+    slug = models.TextField(default="")
     def __str__(self):
         return self.song_name + ' By: ' +  self.artist
 

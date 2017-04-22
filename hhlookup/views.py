@@ -63,8 +63,40 @@ class MatchView(generic.ListView):
         return songs
 
 class ArtistView(generic.DetailView):
-    model = Match
-    template_name = 'hhlookup/match.html'
-def artist_page(request, artist):
-    return HttpResponse("You're looking at the matches for %s." % artist)
+    model = Song
+    template_name = 'hhlookup/artist.html'
+    context_object_name = 'song_list'
 
+    def get_context_data(self, **kwargs):
+        print('KWARGS---->', **kwargs)
+        context= super(ArtistView, self).get_context_data(**kwargs)
+        context['artist'] = Song.objects.filter(slug=self.kwargs['slug']).artist
+        context['rand'] =  Song.objects.order_by('?').first().slug
+        print('RAND', context['rand'])
+        return context        
+
+    def get_queryset(self):
+
+        def gen_youtube_link(query):
+            youtube = build(settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION,
+    developerKey=settings.YOUTUBE_DEVELOPER_KEY)
+            resp = youtube.search().list(q=query, part="id", maxResults=15).execute()
+            
+            if resp['items']:
+                filt_resp = [i for i in resp['items'] if i['id']['kind'] == 'youtube#video']
+                print('+++++++++++', filt_resp[0]['id']['videoId'])
+                return "https://www.youtube.com/embed/" + filt_resp[0]['id']['videoId']
+
+            else:
+                return "https://www.youtube.com/embed/" + 'innelegantStubForMissingVideo'
+
+
+        print('---------------->', self.kwargs)
+        
+        this_artist = Song.objects.get(slug=self.kwargs['slug']).artist
+        songs = Song.objects.filter(artist=this_artist, match__isnull=False)
+        #songs = [s for s in artist.all() if s.match_set.all().exists()]
+        if songs.exists():
+            for song in songs:
+                song.youtube = gen_youtube_link(song.song_name + ' ' + song.artist)
+        return songs
