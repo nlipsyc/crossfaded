@@ -12,5 +12,5 @@ urlpatterns = [
             # /match/ngram
             url(r'^match/(?P<slug>[\w-]+)/$', views.MatchView.as_view(), name='match_page'),
             # /artist/artistname
-            url(r'^artist/(?P<artist>.+)/$', views.ArtistView.as_view(), name='artist_page') ]
+            url(r'^artist/$', views.ArtistView.as_view(), name='artist_page') ]
 
