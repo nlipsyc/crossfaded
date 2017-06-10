@@ -63,8 +63,11 @@ class MatchView(generic.ListView):
             
             if resp['items']:
                 filt_resp = [i for i in resp['items'] if i['id']['kind'] == 'youtube#video']
-                print('+++++++++++', filt_resp[0]['id']['videoId'])
-                return "https://www.youtube.com/embed/" + filt_resp[0]['id']['videoId']
+                if filt_resp:
+                    print('+++++++++++', filt_resp[0]['id']['videoId'])
+                    return "https://www.youtube.com/embed/" + filt_resp[0]['id']['videoId']
+                else:
+                    return "https://www.youtube.com/embed/" + 'innelegantStubForMissingVideo'
 
             else:
                 return "https://www.youtube.com/embed/" + 'innelegantStubForMissingVideo'
