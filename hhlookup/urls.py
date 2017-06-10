@@ -19,4 +19,3 @@ urlpatterns = [
 #             url(r'^api/v1/$', views.song_list),
 #             url(r'^api/v1/(?P<pk>[0-9]+)/$', views.song_detail),
 #             ]
-
