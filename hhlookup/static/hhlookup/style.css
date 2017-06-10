@@ -31,6 +31,14 @@ input{
     font-size: 150%;
 }
 
+.match_list.artist_matches li{
+        margin-bottom: 0.5em;
+}
+
+.artist_names{
+        font-size: 75%;
+        color :rgba(196, 196, 196, 1); 
+}
 @media (min-width:40em) {
         .match_list{
             columns: 2;

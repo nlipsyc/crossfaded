@@ -13,6 +13,10 @@ body{
         font-family: 'Josefin Sans', sans-serif;
 }
 
+input{
+        color:#333;
+}
+
 .highlight{
         background-color: rgba(255, 180, 0, 1);
 }
@@ -24,10 +28,23 @@ body{
 .match_list{
     list-style-type: none;
     padding:0;
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
     font-size: 150%;
+}
+
+.match_list.artist_matches li{
+        margin-bottom: 0.5em;
+}
+
+.artist_names{
+        font-size: 75%;
+        color :rgba(196, 196, 196, 1); 
+}
+@media (min-width:40em) {
+        .match_list{
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+    }
 }
 
 .underline{
@@ -82,3 +99,7 @@ height: 100%;
 	}
 }
 
+/* About */
+.lg-type{
+        font-size:1.25em;
+        padding-bottom:0.75em;

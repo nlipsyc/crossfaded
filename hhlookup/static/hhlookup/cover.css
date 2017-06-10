@@ -64,7 +64,7 @@ body {
  */
 
 .masthead {
-  margin-bottom: 2rem;
+ //margin-bottom: 2rem;
   z-index: 100;
   background-color: #333;
   -webkit-box-shadow: inset 0em 3em 4rem rgba(0,0,0,.5);
