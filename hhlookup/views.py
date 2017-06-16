@@ -15,6 +15,8 @@ from oauth2client.tools import argparser
 
 from itertools import chain
 
+from django.db.models import F
+
 class IndexView(generic.ListView):
     template_name = 'hhlookup/index.html'
     context_object_name = 'match_list'
@@ -55,6 +57,11 @@ class MatchView(generic.ListView):
         return context        
 
     def get_queryset(self):
+        # Dead simple view counter
+        match = Match.objects.get(slug=self.kwargs['slug'])
+        match.views = F('views') + 1
+        match.save()
+        print('Match is {}'.format(match))
 
         def gen_youtube_link(query):
             youtube = build(settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION,
