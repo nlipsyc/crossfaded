@@ -3,16 +3,26 @@
 {% block title %}Crossfaded — The connections of hip hop{% endblock %}
 
 {% block content %}
-        <h2>You're looking at matches for "<em>{{ ngram }}"</em></h2> <a  href="{% url 'match_page' rand %}" class="btn btn-default">Random song</a>
+        <h2 class="important">You're looking at connections for the lyric "<em>{{ ngram }}"</em></h2> 
+        <!-- Random song button -->
+        <!--<a  href="{% url 'match_page' rand %}" class="btn btn-default">Random song</a>-->
                 {% if song_list %}
-                            <div class="allSongs">
+            <div class="allSongs clearfix">
                             {% for s in song_list %}
-                        <div class="songContainer col-md-6"> 
+                <div class="songContainer col-md-6 
+                     {% if forloop.counter|divisibleby:2 %}
+                            even
+                     {% else %}    
+                            odd
+                     {% endif %}                            
+                        "> 
+                            
+
+                    <h3>{{ s.song_name }} — {{ s.artist }}</h3>
                             <div class="youtube">
                                     <iframe width="460" height="315" src="{{ s.youtube }}" frameborder="0" allowfullscreen></iframe>
                             </div>
-                            <h3>{{ s.song_name }} — {{ s.artist }}</h3>
-                                    <p> {{ s.lyrics|highlight:ngram }} </p>
+                    <p class='lyrics'> {{ s.lyrics|highlight:ngram }} </p>
                                     
                                 </div>
                             {% endfor %}

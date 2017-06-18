@@ -7,16 +7,28 @@
                 <form method="GET">
                     {% csrf_token %}        
                     {{ form }}
-                    <h3>Enter a word or artist to start finding connections</h3>
-                    <input type="text" name="match_search" placeholder="Try: Jedi Mind tricks">
-                    </br></br>
-                    <input type="submit" value="Word search" name= 'word_search' class='btn btn-default'>
-                    <input type="submit" value="Artist search" name='artist_search' class='btn btn-default'>
+                    <!-- If we have matches, this doesn't need to be so big -->
+                    {% if current_search %}
+                    <h4>Enter an artist to find their connections to other artists</h4>
+                    {% else %}
+                    <h3 class="important">Enter an artist to find their connections to other artists</h3>
+                    {% endif %}
+                    <div class="input-group col-lg-3 center">
+                            <input class="form-control" type="text" name="match_search" placeholder="Try: Kanye West">
+                            <!--Disabling word search.  Possible bring back as an easter egg -->
+                            <!--<input type="submit" value="Word search" name= 'word_search' class='btn btn-default'>-->
+                            <span class="input-group-btn">
+                                    <input class="btn btn-secondary" type="submit" value="Bring the noise" name='artist_search' class='btn btn-default'>
+                            </span> 
+                    </div>
+                    <!--Removing the random for now
                     <h3>Or find something new</h3>
                     <a href="/crossfaded/" class="btn btn-default">Random</a>
+                    -->
 
                 </form>
-
+                </br>
+                <div>
                 <!-- Are we searching by keyword? -->
                 {% if match_list and not artist_view %}
                     <ul class="match_list">
@@ -26,6 +38,7 @@
                     </ul>
                 <!--Are we searching by artist name -->                    
                 {% elif match_list and artist_view %}
+                <h2 class="important">Pick one of the lyrics that connects {{current_search|title}} to another artist</h2> 
                     <ul class="match_list artist_matches">
                         {% for m in match_list %}
                         <li><a href="{% url 'match_page' m.slug %}">
@@ -38,7 +51,9 @@
 
                    {% endfor %}    
                     </ul>
-                {% else %}
+                    <!-- If the queryset exists but is empty (exculdes the case where they are just hitting the hompage for the first time) -->   
+                {% elif has_searched %}
                         <p>No matches availalble.</p>
                 {% endif %} 
+                </div>
 {% endblock %}

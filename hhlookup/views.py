@@ -25,7 +25,11 @@ class IndexView(generic.ListView):
         context= super(IndexView, self).get_context_data(**kwargs)
         # Flag to see if we should switch to artist view
         # I'm thinking it looks better with the Artist names always there
+        match_form = MatchSearch(self.request.GET)
         context['artist_view'] = True # artist_form.is_valid()
+        context['has_searched'] = match_form.has_changed()
+        if match_form.is_valid() and 'artist_search' in self.request.GET:
+            context['current_search'] = match_form.cleaned_data['match_search']        
         print(context['artist_view'])
         return context        
 
@@ -37,8 +41,9 @@ class IndexView(generic.ListView):
                 return Match.objects.filter(ngram__icontains=match_form.cleaned_data['match_search'])
             # Are we looking for an artist?
             elif match_form.is_valid() and 'artist_search' in self.request.GET:
-                return Match.objects.all().filter(found_in_artist__name__icontains=match_form.cleaned_data['match_search'])
-            return Match.objects.order_by('?')[:20]
+                return Match.objects.all().filter(found_in_artist__name__icontains=match_form.cleaned_data['match_search']).distinct
+            # For simplicity don't show matches if no search has been provided
+            # return Match.objects.order_by('?')[:20]
     
 class AboutView(generic.TemplateView):
     template_name = 'hhlookup/about.html'
@@ -70,11 +75,12 @@ class MatchView(generic.ListView):
             
             if resp['items']:
                 filt_resp = [i for i in resp['items'] if i['id']['kind'] == 'youtube#video']
-                print('+++++++++++', filt_resp[0]['id']['videoId'])
-                return "https://www.youtube.com/embed/" + filt_resp[0]['id']['videoId']
+                try:
+                    print('+++++++++++', filt_resp[0]['id']['videoId'])
+                    return "https://www.youtube.com/embed/" + filt_resp[0]['id']['videoId']
 
-            else:
-                return "https://www.youtube.com/embed/" + 'innelegantStubForMissingVideo'
+                except:
+                    return "https://www.youtube.com/embed/" + 'innelegantStubForMissingVideo'
 
 
         print('---------------->', self.kwargs)
